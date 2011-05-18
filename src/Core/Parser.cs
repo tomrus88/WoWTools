@@ -84,6 +84,13 @@ namespace WowTools.Core
             return (T)obj;
         }
 
+        public uint ReadUInt16(string format, params object[] args)
+        {
+            var ret = Reader.ReadUInt16();
+            AppendFormatLine(format, MergeArguments(args, ret));
+            return ret;
+        }
+
         public int ReadInt32(string format, params object[] args)
         {
             var ret = Reader.ReadInt32();
