@@ -1,0 +1,20 @@
+Imports WowTools.Core
+
+<Parser(OpCodes.SMSG_TUTORIAL_FLAGS)> Friend _
+Class PowerUpdateParser
+    Inherits Parser
+
+    public Sub New(pkt As Packet)
+        MyBase.New(pkt)
+    End Sub
+
+    public Overrides Sub Parse()
+        Dim gr = Packet.CreateReader()
+
+        For i As Integer = 0 To 7
+            AppendFormatLine("Mask {0}: {1:X8}", i, gr.ReadUInt32())
+        Next
+
+        CheckPacket(gr)
+    End Sub
+End Class
