@@ -123,6 +123,9 @@
     <Compile Include="Forms\ListViewEx.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Parsers\MovementOpcodes.cs">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Compile>
     <Compile Include="Parsers\SMSG_MOTD.cs">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Compile>

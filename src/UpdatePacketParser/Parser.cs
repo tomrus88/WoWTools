@@ -94,7 +94,7 @@ namespace UpdatePacketParser
         {
             var guid = gr.ReadPackedGuid();
 
-            var mInfo = MovementInfo.Read(gr);
+            var mInfo = MovementBlock.Read(gr);
 
             // is it even used by blizzard?
         }
@@ -105,7 +105,7 @@ namespace UpdatePacketParser
 
             var objectTypeId = (ObjectTypes)gr.ReadByte();
 
-            var movement = MovementInfo.Read(gr);
+            var movement = MovementBlock.Read(gr);
 
             // values part
             var update = WoWObjectUpdate.Read(gr);
@@ -252,140 +252,140 @@ namespace UpdatePacketParser
         public void PrintObjectMovementInfo(ulong guid, RichTextBox richTextBox)
         {
             var obj = objects[guid];
-            var mInfo = obj.Movement;
+            var mBlock = obj.Movement;
             var strings = new List<string>();
 
-            strings.Add(String.Format("Update Flags: {0}", mInfo.UpdateFlags));
+            strings.Add(String.Format("Update Flags: {0}", mBlock.UpdateFlags));
 
-            if (mInfo.UpdateFlags.HasFlag(UpdateFlags.UPDATEFLAG_LIVING))
+            if (mBlock.UpdateFlags.HasFlag(UpdateFlags.UPDATEFLAG_LIVING))
             {
-                strings.Add(String.Format("Movement Flags: {0}", mInfo.Flags));
-                strings.Add(String.Format("Unknown Flags: {0}", mInfo.Flags2));
-                strings.Add(String.Format("Timestamp: {0:X8}", mInfo.TimeStamp));
+                strings.Add(String.Format("Movement Flags: {0}", mBlock.Movement.Flags));
+                strings.Add(String.Format("Unknown Flags: {0}", mBlock.Movement.Flags2));
+                strings.Add(String.Format("Timestamp: {0:X8}", mBlock.Movement.TimeStamp));
 
-                strings.Add(String.Format("Position: {0}", mInfo.Position));
+                strings.Add(String.Format("Position: {0}", mBlock.Movement.Position));
 
-                if (mInfo.Flags.HasFlag(MovementFlags.ONTRANSPORT))
+                if (mBlock.Movement.Flags.HasFlag(MovementFlags.ONTRANSPORT))
                 {
-                    strings.Add(String.Format("Transport GUID: {0:X16}", mInfo.Transport.Guid));
-                    strings.Add(String.Format("Transport POS: {0}", mInfo.Transport.Position));
-                    strings.Add(String.Format("Transport Time: {0:X8}", mInfo.Transport.Time));
-                    strings.Add(String.Format("Transport Seat: {0:X2}", mInfo.Transport.Seat));
+                    strings.Add(String.Format("Transport GUID: {0:X16}", mBlock.Movement.Transport.Guid));
+                    strings.Add(String.Format("Transport POS: {0}", mBlock.Movement.Transport.Position));
+                    strings.Add(String.Format("Transport Time: {0:X8}", mBlock.Movement.Transport.Time));
+                    strings.Add(String.Format("Transport Seat: {0:X2}", mBlock.Movement.Transport.Seat));
                 }
 
-                if (mInfo.Flags.HasFlag(MovementFlags.SWIMMING) || mInfo.Flags.HasFlag(MovementFlags.FLYING) ||
-                    mInfo.Flags2.HasFlag(MovementFlags2.AlwaysAllowPitching))
+                if (mBlock.Movement.Flags.HasFlag(MovementFlags.SWIMMING) || mBlock.Movement.Flags.HasFlag(MovementFlags.FLYING) ||
+                    mBlock.Movement.Flags2.HasFlag(MovementFlags2.AlwaysAllowPitching))
                 {
-                    strings.Add(String.Format("Swimming Pitch: {0}", mInfo.Pitch));
+                    strings.Add(String.Format("Swimming Pitch: {0}", mBlock.Movement.Pitch));
                 }
 
-                strings.Add(String.Format("Fall Time: {0:X8}", mInfo.FallTime));
+                strings.Add(String.Format("Fall Time: {0:X8}", mBlock.Movement.FallTime));
 
-                if (mInfo.Flags.HasFlag(MovementFlags.FALLING))
+                if (mBlock.Movement.Flags.HasFlag(MovementFlags.FALLING))
                 {
-                    strings.Add(String.Format("Jumping Unk: {0}", mInfo.FallVelocity));
-                    strings.Add(String.Format("Jumping Sin: {0}", mInfo.FallCosAngle));
-                    strings.Add(String.Format("Jumping Cos: {0}", mInfo.FallSinAngle));
-                    strings.Add(String.Format("Jumping Speed: {0}", mInfo.FallSpeed));
+                    strings.Add(String.Format("Jumping Unk: {0}", mBlock.Movement.FallVelocity));
+                    strings.Add(String.Format("Jumping Sin: {0}", mBlock.Movement.FallCosAngle));
+                    strings.Add(String.Format("Jumping Cos: {0}", mBlock.Movement.FallSinAngle));
+                    strings.Add(String.Format("Jumping Speed: {0}", mBlock.Movement.FallSpeed));
                 }
 
-                if (mInfo.Flags.HasFlag(MovementFlags.SPLINEELEVATION))
+                if (mBlock.Movement.Flags.HasFlag(MovementFlags.SPLINEELEVATION))
                 {
-                    strings.Add(String.Format("Spline elevation: {0}", mInfo.SplineElevation));
+                    strings.Add(String.Format("Spline elevation: {0}", mBlock.Movement.SplineElevation));
                 }
 
-                for (byte i = 0; i < mInfo.speeds.Length; ++i)
-                    strings.Add(String.Format("Speed{0}: {1}", i, mInfo.speeds[i]));
+                for (byte i = 0; i < mBlock.speeds.Length; ++i)
+                    strings.Add(String.Format("Speed{0}: {1}", i, mBlock.speeds[i]));
 
-                if (mInfo.Flags.HasFlag(MovementFlags.SPLINEENABLED))
+                if (mBlock.Movement.Flags.HasFlag(MovementFlags.SPLINEENABLED))
                 {
-                    strings.Add(String.Format("Spline Flags: {0}", mInfo.Spline.Flags));
+                    strings.Add(String.Format("Spline Flags: {0}", mBlock.Spline.Flags));
 
-                    if (mInfo.Spline.Flags.HasFlag(SplineFlags.FINALPOINT))
+                    if (mBlock.Spline.Flags.HasFlag(SplineFlags.FINALPOINT))
                     {
-                        strings.Add(String.Format("Spline Point: {0}", mInfo.Spline.Point));
+                        strings.Add(String.Format("Spline Point: {0}", mBlock.Spline.Point));
                     }
 
-                    if (mInfo.Spline.Flags.HasFlag(SplineFlags.FINALTARGET))
+                    if (mBlock.Spline.Flags.HasFlag(SplineFlags.FINALTARGET))
                     {
-                        strings.Add(String.Format("Spline GUID: {0:X16}", mInfo.Spline.Guid));
+                        strings.Add(String.Format("Spline GUID: {0:X16}", mBlock.Spline.Guid));
                     }
 
-                    if (mInfo.Spline.Flags.HasFlag(SplineFlags.FINALORIENT))
+                    if (mBlock.Spline.Flags.HasFlag(SplineFlags.FINALORIENT))
                     {
-                        strings.Add(String.Format("Spline Orient: {0}", mInfo.Spline.Rotation));
+                        strings.Add(String.Format("Spline Orient: {0}", mBlock.Spline.Rotation));
                     }
 
-                    strings.Add(String.Format("Spline CurrTime: {0:X8}", mInfo.Spline.CurrentTime));
-                    strings.Add(String.Format("Spline FullTime: {0:X8}", mInfo.Spline.FullTime));
-                    strings.Add(String.Format("Spline Unk: {0:X8}", mInfo.Spline.Unknown1));
+                    strings.Add(String.Format("Spline CurrTime: {0:X8}", mBlock.Spline.CurrentTime));
+                    strings.Add(String.Format("Spline FullTime: {0:X8}", mBlock.Spline.FullTime));
+                    strings.Add(String.Format("Spline Unk: {0:X8}", mBlock.Spline.Unknown1));
 
-                    strings.Add(String.Format("Spline float1: {0}", mInfo.Spline.DurationMultiplier));
-                    strings.Add(String.Format("Spline float2: {0}", mInfo.Spline.UnknownFloat2));
-                    strings.Add(String.Format("Spline float3: {0}", mInfo.Spline.UnknownFloat3));
+                    strings.Add(String.Format("Spline float1: {0}", mBlock.Spline.DurationMultiplier));
+                    strings.Add(String.Format("Spline float2: {0}", mBlock.Spline.UnknownFloat2));
+                    strings.Add(String.Format("Spline float3: {0}", mBlock.Spline.UnknownFloat3));
 
-                    strings.Add(String.Format("Spline uint1: {0:X8}", mInfo.Spline.Unknown2));
+                    strings.Add(String.Format("Spline uint1: {0:X8}", mBlock.Spline.Unknown2));
 
-                    strings.Add(String.Format("Spline Count: {0:X8}", mInfo.Spline.Count));
+                    strings.Add(String.Format("Spline Count: {0:X8}", mBlock.Spline.Count));
 
-                    for (uint i = 0; i < mInfo.Spline.Count; ++i)
+                    for (uint i = 0; i < mBlock.Spline.Count; ++i)
                     {
-                        strings.Add(String.Format("Splines_{0}: {1}", i, mInfo.Spline.Splines[(int)i]));
+                        strings.Add(String.Format("Splines_{0}: {1}", i, mBlock.Spline.Splines[(int)i]));
                     }
 
-                    strings.Add(String.Format("Spline mode: {0}", mInfo.Spline.SplineMode));
+                    strings.Add(String.Format("Spline mode: {0}", mBlock.Spline.SplineMode));
 
-                    strings.Add(String.Format("Spline End Point: {0}", mInfo.Spline.EndPoint));
+                    strings.Add(String.Format("Spline End Point: {0}", mBlock.Spline.EndPoint));
                 }
             }
             else
             {
-                if (mInfo.UpdateFlags.HasFlag(UpdateFlags.UPDATEFLAG_GO_POSITION))
+                if (mBlock.UpdateFlags.HasFlag(UpdateFlags.UPDATEFLAG_GO_POSITION))
                 {
-                    strings.Add(String.Format("GUID 0x100: {0:X16}", mInfo.Transport.Guid));
-                    strings.Add(String.Format("Position 0x100: {0}", mInfo.Position));
-                    strings.Add(String.Format("TransportPosition 0x100: {0}", mInfo.Transport.Position));
-                    strings.Add(String.Format("Facing 0x100: {0}", mInfo.Facing));
-                    strings.Add(String.Format("Transport Facing 0x100: {0}", mInfo.Transport.Facing));
+                    strings.Add(String.Format("GUID 0x100: {0:X16}", mBlock.Movement.Transport.Guid));
+                    strings.Add(String.Format("Position 0x100: {0}", mBlock.Movement.Position));
+                    strings.Add(String.Format("TransportPosition 0x100: {0}", mBlock.Movement.Transport.Position));
+                    strings.Add(String.Format("Facing 0x100: {0}", mBlock.Movement.Facing));
+                    strings.Add(String.Format("Transport Facing 0x100: {0}", mBlock.Movement.Transport.Facing));
                 }
                 else
                 {
-                    if (mInfo.UpdateFlags.HasFlag(UpdateFlags.UPDATEFLAG_HAS_POSITION))
+                    if (mBlock.UpdateFlags.HasFlag(UpdateFlags.UPDATEFLAG_HAS_POSITION))
                     {
-                        strings.Add(String.Format("Position: {0}", mInfo.Position));
+                        strings.Add(String.Format("Position: {0}", mBlock.Movement.Position));
                     }
                 }
             }
 
-            if (mInfo.UpdateFlags.HasFlag(UpdateFlags.UPDATEFLAG_LOWGUID))
+            if (mBlock.UpdateFlags.HasFlag(UpdateFlags.UPDATEFLAG_LOWGUID))
             {
-                strings.Add(String.Format("Low GUID: {0:X8}", mInfo.LowGuid));
+                strings.Add(String.Format("Low GUID: {0:X8}", mBlock.LowGuid));
             }
 
-            if (mInfo.UpdateFlags.HasFlag(UpdateFlags.UPDATEFLAG_HIGHGUID))
+            if (mBlock.UpdateFlags.HasFlag(UpdateFlags.UPDATEFLAG_HIGHGUID))
             {
-                strings.Add(String.Format("High GUID: {0:X8}", mInfo.HighGuid));
+                strings.Add(String.Format("High GUID: {0:X8}", mBlock.HighGuid));
             }
 
-            if (mInfo.UpdateFlags.HasFlag(UpdateFlags.UPDATEFLAG_TARGET_GUID))
+            if (mBlock.UpdateFlags.HasFlag(UpdateFlags.UPDATEFLAG_TARGET_GUID))
             {
-                strings.Add(String.Format("Target GUID: {0:X16}", mInfo.AttackingTarget));
+                strings.Add(String.Format("Target GUID: {0:X16}", mBlock.AttackingTarget));
             }
 
-            if (mInfo.UpdateFlags.HasFlag(UpdateFlags.UPDATEFLAG_TRANSPORT))
+            if (mBlock.UpdateFlags.HasFlag(UpdateFlags.UPDATEFLAG_TRANSPORT))
             {
-                strings.Add(String.Format("Transport Time: {0:X8}", mInfo.TransportTime));
+                strings.Add(String.Format("Transport Time: {0:X8}", mBlock.TransportTime));
             }
 
-            if (mInfo.UpdateFlags.HasFlag(UpdateFlags.UPDATEFLAG_VEHICLE))
+            if (mBlock.UpdateFlags.HasFlag(UpdateFlags.UPDATEFLAG_VEHICLE))
             {
-                strings.Add(String.Format("Vehicle Id: {0:X8}", mInfo.VehicleId));
-                strings.Add(String.Format("Facing Adjustement: {0}", mInfo.VehicleAimAdjustement));
+                strings.Add(String.Format("Vehicle Id: {0:X8}", mBlock.VehicleId));
+                strings.Add(String.Format("Facing Adjustement: {0}", mBlock.VehicleAimAdjustement));
             }
 
-            if (mInfo.UpdateFlags.HasFlag(UpdateFlags.UPDATEFLAG_GO_ROTATION))
+            if (mBlock.UpdateFlags.HasFlag(UpdateFlags.UPDATEFLAG_GO_ROTATION))
             {
-                strings.Add(String.Format("GO rotation: {0}", mInfo.GoRotationULong.ToString("X16")));
+                strings.Add(String.Format("GO rotation: {0}", mBlock.GoRotationULong.ToString("X16")));
             }
 
             richTextBox.Lines = strings.ToArray();

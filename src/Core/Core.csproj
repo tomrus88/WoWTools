@@ -101,6 +101,7 @@
     <Compile Include="Coords4.cs" />
     <Compile Include="Direction.cs" />
     <Compile Include="MovementFlags.cs" />
+    <Compile Include="MovementBlock.cs" />
     <Compile Include="MovementInfo.cs" />
     <Compile Include="Opcodes.cs" />
     <Compile Include="Packet.cs" />

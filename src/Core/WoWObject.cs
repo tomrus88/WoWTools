@@ -10,7 +10,7 @@ namespace WowTools.Core
     {
         private readonly List<WoWObjectUpdate> updates = new List<WoWObjectUpdate>();
 
-        public WoWObject(ObjectTypes typeId, MovementInfo movement, IDictionary<int, uint> data)
+        public WoWObject(ObjectTypes typeId, MovementBlock movement, IDictionary<int, uint> data)
             : base(data)
         {
             TypeId = typeId;
@@ -24,7 +24,7 @@ namespace WowTools.Core
             get { return updates; }
         }
 
-        public MovementInfo Movement { get; private set; }
+        public MovementBlock Movement { get; private set; }
 
         public void AddUpdate(WoWObjectUpdate update)
         {

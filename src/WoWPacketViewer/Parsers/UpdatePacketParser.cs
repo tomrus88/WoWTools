@@ -66,7 +66,7 @@ namespace WoWPacketViewer.Parsers
         {
             var guid = ReadPackedGuid("Object guid: 0x{0:X16}");
 
-            var mInfo = MovementInfo.Read(Reader);
+            var mInfo = MovementBlock.Read(Reader);
         }
 
         private void ParseCreateObjects(int i)
@@ -75,7 +75,7 @@ namespace WoWPacketViewer.Parsers
 
             var objectTypeId = ReadUInt8<ObjectTypes>("Object Type: {0}");
 
-            var movement = MovementInfo.Read(Reader);
+            var movement = MovementBlock.Read(Reader);
 
             // values part
             var update = WoWObjectUpdate.Read(Reader);
@@ -95,7 +95,7 @@ namespace WoWPacketViewer.Parsers
             var count = ReadUInt32("OOR Objects count: {0}");
             var guids = new ulong[count];
             for (var j = 0; j < count; ++j)
-                guids[j] = ReadPackedGuid("OOR Object Guid: 0x{0:X16}");
+                guids[j] = ReadPackedGuid("OOR Object {0} Guid: 0x{1:X16}", j);
         }
 
         private void ParseNearObjects(int i)
@@ -103,7 +103,7 @@ namespace WoWPacketViewer.Parsers
             var count = ReadUInt32("Near Objects count: {0}");
             var guids = new ulong[count];
             for (var j = 0; j < count; ++j)
-                guids[j] = ReadPackedGuid("Near Object Guid: 0x{0:X16}");
+                guids[j] = ReadPackedGuid("Near Object {0} Guid: 0x{1:X16}", j);
         }
 
         private WoWObject GetWoWObject(ulong guid)
