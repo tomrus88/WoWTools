@@ -66,8 +66,12 @@ namespace WoWPacketViewer
             var item = _list.FindItemWithText(text, true, SelectedIndex, true);
             if (item != null)
             {
+                _list.BeginUpdate();
+                _list.GridLines = false;
                 item.Selected = true;
                 item.EnsureVisible();
+                _list.GridLines = true;
+                _list.EndUpdate();
                 return;
             }
 
@@ -95,7 +99,9 @@ namespace WoWPacketViewer
             else
             {
                 // A cache miss, so create a new ListViewItem and pass it back.
-                e.Item = CreateListViewItemByIndex(e.ItemIndex);
+                var item = CreateListViewItemByIndex(e.ItemIndex);
+                e.Item = item;
+                _listCache[e.ItemIndex] = item;
             }
         }
 

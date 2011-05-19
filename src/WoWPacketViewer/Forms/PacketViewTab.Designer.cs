@@ -30,15 +30,15 @@ namespace WoWPacketViewer
         private void InitializeComponent()
         {
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
+            this.splitContainer2 = new System.Windows.Forms.SplitContainer();
+            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
+            this.richTextBox2 = new System.Windows.Forms.RichTextBox();
             this._list = new WoWPacketViewer.ListViewEx();
             this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader3 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader4 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader5 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.splitContainer2 = new System.Windows.Forms.SplitContainer();
-            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
-            this.richTextBox2 = new System.Windows.Forms.RichTextBox();
             this.columnHeader6 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
@@ -67,59 +67,6 @@ namespace WoWPacketViewer
             this.splitContainer1.Size = new System.Drawing.Size(947, 588);
             this.splitContainer1.SplitterDistance = 376;
             this.splitContainer1.TabIndex = 0;
-            // 
-            // _list
-            // 
-            this._list.BackColor = System.Drawing.SystemColors.WindowText;
-            this._list.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.columnHeader1,
-            this.columnHeader2,
-            this.columnHeader3,
-            this.columnHeader4,
-            this.columnHeader5,
-            this.columnHeader6});
-            this._list.Dock = System.Windows.Forms.DockStyle.Fill;
-            this._list.Font = new System.Drawing.Font("Lucida Console", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this._list.ForeColor = System.Drawing.Color.MediumSeaGreen;
-            this._list.FullRowSelect = true;
-            this._list.GridLines = true;
-            this._list.HideSelection = false;
-            this._list.Location = new System.Drawing.Point(0, 0);
-            this._list.MultiSelect = false;
-            this._list.Name = "_list";
-            this._list.Size = new System.Drawing.Size(947, 376);
-            this._list.TabIndex = 0;
-            this._list.UseCompatibleStateImageBehavior = false;
-            this._list.View = System.Windows.Forms.View.Details;
-            this._list.CacheVirtualItems += new System.Windows.Forms.CacheVirtualItemsEventHandler(this._list_CacheVirtualItems);
-            this._list.RetrieveVirtualItem += new System.Windows.Forms.RetrieveVirtualItemEventHandler(this._list_RetrieveVirtualItem);
-            this._list.SearchForVirtualItem += new System.Windows.Forms.SearchForVirtualItemEventHandler(this._list_SearchForVirtualItem);
-            this._list.SelectedIndexChanged += new System.EventHandler(this._list_SelectedIndexChanged);
-            // 
-            // columnHeader1
-            // 
-            this.columnHeader1.Text = "Time";
-            this.columnHeader1.Width = 70;
-            // 
-            // columnHeader2
-            // 
-            this.columnHeader2.Text = "Ticks";
-            this.columnHeader2.Width = 70;
-            // 
-            // columnHeader3
-            // 
-            this.columnHeader3.Text = "Client Opcode";
-            this.columnHeader3.Width = 320;
-            // 
-            // columnHeader4
-            // 
-            this.columnHeader4.Text = "Server Opcode";
-            this.columnHeader4.Width = 320;
-            // 
-            // columnHeader5
-            // 
-            this.columnHeader5.Text = "Packet Size";
-            this.columnHeader5.Width = 100;
             // 
             // splitContainer2
             // 
@@ -165,6 +112,60 @@ namespace WoWPacketViewer
             this.richTextBox2.Size = new System.Drawing.Size(539, 208);
             this.richTextBox2.TabIndex = 0;
             this.richTextBox2.Text = "";
+            // 
+            // _list
+            // 
+            this._list.BackColor = System.Drawing.SystemColors.WindowText;
+            this._list.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.columnHeader1,
+            this.columnHeader2,
+            this.columnHeader3,
+            this.columnHeader4,
+            this.columnHeader5,
+            this.columnHeader6});
+            this._list.Dock = System.Windows.Forms.DockStyle.Fill;
+            this._list.Font = new System.Drawing.Font("Lucida Console", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this._list.ForeColor = System.Drawing.Color.MediumSeaGreen;
+            this._list.FullRowSelect = true;
+            this._list.GridLines = true;
+            this._list.HideSelection = false;
+            this._list.Location = new System.Drawing.Point(0, 0);
+            this._list.MultiSelect = false;
+            this._list.Name = "_list";
+            this._list.ShowGroups = false;
+            this._list.Size = new System.Drawing.Size(947, 376);
+            this._list.TabIndex = 0;
+            this._list.UseCompatibleStateImageBehavior = false;
+            this._list.View = System.Windows.Forms.View.Details;
+            this._list.CacheVirtualItems += new System.Windows.Forms.CacheVirtualItemsEventHandler(this._list_CacheVirtualItems);
+            this._list.RetrieveVirtualItem += new System.Windows.Forms.RetrieveVirtualItemEventHandler(this._list_RetrieveVirtualItem);
+            this._list.SearchForVirtualItem += new System.Windows.Forms.SearchForVirtualItemEventHandler(this._list_SearchForVirtualItem);
+            this._list.SelectedIndexChanged += new System.EventHandler(this._list_SelectedIndexChanged);
+            // 
+            // columnHeader1
+            // 
+            this.columnHeader1.Text = "Time";
+            this.columnHeader1.Width = 70;
+            // 
+            // columnHeader2
+            // 
+            this.columnHeader2.Text = "Ticks";
+            this.columnHeader2.Width = 70;
+            // 
+            // columnHeader3
+            // 
+            this.columnHeader3.Text = "Client Opcode";
+            this.columnHeader3.Width = 320;
+            // 
+            // columnHeader4
+            // 
+            this.columnHeader4.Text = "Server Opcode";
+            this.columnHeader4.Width = 320;
+            // 
+            // columnHeader5
+            // 
+            this.columnHeader5.Text = "Packet Size";
+            this.columnHeader5.Width = 100;
             // 
             // columnHeader6
             // 
