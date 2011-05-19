@@ -1,6 +1,6 @@
 ﻿using WowTools.Core;
 
-namespace WoWPacketViewer.Parsers.Spells
+namespace WoWPacketViewer
 {
     [Parser(OpCodes.SMSG_SPELL_GO)]
     class SpellGoParser : SpellParserBase

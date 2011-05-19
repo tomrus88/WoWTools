@@ -4,7 +4,7 @@ using System.IO;
 using System.Text;
 using WowTools.Core;
 
-namespace WoWPacketViewer.Parsers.Warden
+namespace WoWPacketViewer
 {
     [Parser(OpCodes.SMSG_WARDEN_DATA)]
     class SmsgWardenData : Parser

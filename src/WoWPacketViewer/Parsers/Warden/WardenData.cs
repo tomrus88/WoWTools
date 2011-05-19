@@ -4,13 +4,14 @@ using System.Security.Cryptography;
 using System.Text;
 using WowTools.Core;
 
-namespace WoWPacketViewer.Parsers.Warden
+namespace WoWPacketViewer
 {
     static class WardenData
     {
         public static IList<CheckInfo> CheckInfos = new List<CheckInfo>();
         public static IDictionary<byte, CheckType> CheckTypes = new Dictionary<byte, CheckType>();
         private static FrmWardenDebug wardenDebugForm;
+        public static bool Enabled { get; set; }
 
         public static void InitCheckTypes()
         {
@@ -21,6 +22,9 @@ namespace WoWPacketViewer.Parsers.Warden
 
         public static void ShowForm(IEnumerable<string> strings, byte[] checks, byte checkByte, long position)
         {
+            if (!Enabled)
+                return;
+
             if (wardenDebugForm == null || wardenDebugForm.IsDisposed)
                 wardenDebugForm = new FrmWardenDebug();
 

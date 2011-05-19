@@ -1,6 +1,6 @@
 using WowTools.Core;
 
-namespace WoWPacketViewer.Parsers.Spells
+namespace WoWPacketViewer
 {
     abstract class SpellParserBase : Parser
     {

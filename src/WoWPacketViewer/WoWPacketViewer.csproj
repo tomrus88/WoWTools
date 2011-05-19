@@ -123,7 +123,7 @@
     <Compile Include="Forms\ListViewEx.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Parsers\MovementOpcodes.cs">
+    <Compile Include="Parsers\MSG_MOVE_ALL.cs">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Compile>
     <Compile Include="Parsers\SMSG_MOTD.cs">
@@ -139,34 +139,34 @@
       <DependentUpon>PacketViewTab.cs</DependentUpon>
     </Compile>
     <Compile Include="ParserFactory.cs" />
-    <Compile Include="Parsers\AuraUpdateParser.cs">
+    <Compile Include="Parsers\SMSG_AURA_UPDATE.cs">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Compile>
-    <Compile Include="Parsers\AuthSession.cs">
+    <Compile Include="Parsers\CMSG_AUTH_SESSION.cs">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Compile>
-    <Compile Include="Parsers\EquipmentSetsParser.cs">
+    <Compile Include="Parsers\SMSG_LOAD_EQUIPMENT_SET.cs">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Compile>
-    <Compile Include="Parsers\InitialSpellsParser.cs">
+    <Compile Include="Parsers\SMSG_INITIAL_SPELLS.cs">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Compile>
-    <Compile Include="Parsers\InspectParser.cs">
+    <Compile Include="Parsers\SMSG_INSPECT_RESULTS.cs">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Compile>
-    <Compile Include="Parsers\LFGParser.cs">
+    <Compile Include="Parsers\SMSG_LFG_SEARCH_RESULTS.cs">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Compile>
-    <Compile Include="Parsers\MailListResult.cs">
+    <Compile Include="Parsers\SMSG_MAIL_LIST_RESULT.cs">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Compile>
-    <Compile Include="Parsers\MonsterMoveParser.cs">
+    <Compile Include="Parsers\SMSG_MONSTER_MOVE.cs">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Compile>
-    <Compile Include="Parsers\PetSpellsParser.cs">
+    <Compile Include="Parsers\SMSG_PET_SPELLS.cs">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Compile>
-    <Compile Include="Parsers\PowerUpdateParser.cs">
+    <Compile Include="Parsers\SMSG_POWER_UPDATE.cs">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Compile>
     <Compile Include="Parsers\SMSG_CHAR_ENUM.cs">
@@ -184,13 +184,13 @@
     <Compile Include="Parsers\Spells\CooldownMask.cs">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Compile>
-    <Compile Include="Parsers\Spells\SpellGoParser.cs">
+    <Compile Include="Parsers\Spells\SMSG_SPELL_GO.cs">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Compile>
     <Compile Include="Parsers\Spells\SpellParserBase.cs">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Compile>
-    <Compile Include="Parsers\Spells\SpellStartParser.cs">
+    <Compile Include="Parsers\Spells\SMSG_SPELL_START.cs">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Compile>
     <Compile Include="Parsers\Spells\TargetFlags.cs">
@@ -199,13 +199,13 @@
     <Compile Include="Parsers\UnknownPacketParser.cs">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Compile>
-    <Compile Include="Parsers\UpdatePacketParser.cs">
+    <Compile Include="Parsers\SMSG_UPDATE_OBJECT.cs">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Compile>
     <Compile Include="Parsers\Warden\CheckInfo.cs" />
     <Compile Include="Parsers\Warden\CheckType.cs" />
-    <Compile Include="Parsers\Warden\CmsgWardenData.cs" />
-    <Compile Include="Parsers\Warden\SmsgWardenData.cs" />
+    <Compile Include="Parsers\Warden\CMSG_WARDEN_DATA.cs" />
+    <Compile Include="Parsers\Warden\SMSG_WARDEN_DATA.cs" />
     <Compile Include="Parsers\Warden\WardenData.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

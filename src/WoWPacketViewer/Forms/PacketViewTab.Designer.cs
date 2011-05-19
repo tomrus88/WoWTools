@@ -39,6 +39,7 @@ namespace WoWPacketViewer
             this.splitContainer2 = new System.Windows.Forms.SplitContainer();
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.richTextBox2 = new System.Windows.Forms.RichTextBox();
+            this.columnHeader6 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -63,8 +64,8 @@ namespace WoWPacketViewer
             // splitContainer1.Panel2
             // 
             this.splitContainer1.Panel2.Controls.Add(this.splitContainer2);
-            this.splitContainer1.Size = new System.Drawing.Size(888, 585);
-            this.splitContainer1.SplitterDistance = 375;
+            this.splitContainer1.Size = new System.Drawing.Size(947, 588);
+            this.splitContainer1.SplitterDistance = 376;
             this.splitContainer1.TabIndex = 0;
             // 
             // _list
@@ -75,7 +76,8 @@ namespace WoWPacketViewer
             this.columnHeader2,
             this.columnHeader3,
             this.columnHeader4,
-            this.columnHeader5});
+            this.columnHeader5,
+            this.columnHeader6});
             this._list.Dock = System.Windows.Forms.DockStyle.Fill;
             this._list.Font = new System.Drawing.Font("Lucida Console", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this._list.ForeColor = System.Drawing.Color.MediumSeaGreen;
@@ -85,7 +87,7 @@ namespace WoWPacketViewer
             this._list.Location = new System.Drawing.Point(0, 0);
             this._list.MultiSelect = false;
             this._list.Name = "_list";
-            this._list.Size = new System.Drawing.Size(888, 375);
+            this._list.Size = new System.Drawing.Size(947, 376);
             this._list.TabIndex = 0;
             this._list.UseCompatibleStateImageBehavior = false;
             this._list.View = System.Windows.Forms.View.Details;
@@ -132,8 +134,8 @@ namespace WoWPacketViewer
             // splitContainer2.Panel2
             // 
             this.splitContainer2.Panel2.Controls.Add(this.richTextBox2);
-            this.splitContainer2.Size = new System.Drawing.Size(888, 206);
-            this.splitContainer2.SplitterDistance = 379;
+            this.splitContainer2.Size = new System.Drawing.Size(947, 208);
+            this.splitContainer2.SplitterDistance = 404;
             this.splitContainer2.TabIndex = 0;
             // 
             // richTextBox1
@@ -146,7 +148,7 @@ namespace WoWPacketViewer
             this.richTextBox1.Name = "richTextBox1";
             this.richTextBox1.ReadOnly = true;
             this.richTextBox1.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.Vertical;
-            this.richTextBox1.Size = new System.Drawing.Size(379, 206);
+            this.richTextBox1.Size = new System.Drawing.Size(404, 208);
             this.richTextBox1.TabIndex = 0;
             this.richTextBox1.Text = "";
             // 
@@ -160,16 +162,20 @@ namespace WoWPacketViewer
             this.richTextBox2.Name = "richTextBox2";
             this.richTextBox2.ReadOnly = true;
             this.richTextBox2.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.Vertical;
-            this.richTextBox2.Size = new System.Drawing.Size(505, 206);
+            this.richTextBox2.Size = new System.Drawing.Size(539, 208);
             this.richTextBox2.TabIndex = 0;
             this.richTextBox2.Text = "";
+            // 
+            // columnHeader6
+            // 
+            this.columnHeader6.Text = "Parser";
             // 
             // PacketViewTab
             // 
             this.Controls.Add(this.splitContainer1);
             this.DoubleBuffered = true;
             this.Name = "PacketViewTab";
-            this.Size = new System.Drawing.Size(888, 585);
+            this.Size = new System.Drawing.Size(947, 588);
             this.splitContainer1.Panel1.ResumeLayout(false);
             this.splitContainer1.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
@@ -194,5 +200,6 @@ namespace WoWPacketViewer
         private System.Windows.Forms.ColumnHeader columnHeader3;
         private System.Windows.Forms.ColumnHeader columnHeader4;
         private System.Windows.Forms.ColumnHeader columnHeader5;
+        private System.Windows.Forms.ColumnHeader columnHeader6;
     }
 }

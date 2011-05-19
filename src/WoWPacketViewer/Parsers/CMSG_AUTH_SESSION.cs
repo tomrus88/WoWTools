@@ -1,7 +1,7 @@
 ﻿using System.IO;
 using WowTools.Core;
 
-namespace WoWPacketViewer.Parsers
+namespace WoWPacketViewer
 {
     [Parser(OpCodes.CMSG_AUTH_SESSION)]
     class CMSG_AUTH_SESSION : Parser

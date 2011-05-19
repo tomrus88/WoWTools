@@ -1,6 +1,6 @@
 ﻿using WowTools.Core;
 
-namespace WoWPacketViewer.Parsers
+namespace WoWPacketViewer
 {
     [Parser(OpCodes.SMSG_LOAD_EQUIPMENT_SET)]
     class EquipmentSetListParser : Parser

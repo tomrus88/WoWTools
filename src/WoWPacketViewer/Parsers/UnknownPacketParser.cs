@@ -1,6 +1,6 @@
 using WowTools.Core;
 
-namespace WoWPacketViewer.Parsers
+namespace WoWPacketViewer
 {
     class UnknownPacketParser : Parser
     {

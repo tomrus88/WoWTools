@@ -1,7 +1,7 @@
 ﻿using System;
 using WowTools.Core;
 
-namespace WoWPacketViewer.Parsers
+namespace WoWPacketViewer
 {
     enum LfgType
     {
@@ -22,28 +22,10 @@ namespace WoWPacketViewer.Parsers
         DAMAGE = 8
     };
 
-    [Parser(OpCodes.CMSG_LFG_SEARCH_JOIN)]
     [Parser(OpCodes.SMSG_LFG_SEARCH_RESULTS)]
     class LookingForGroupParser : Parser
     {
         public override void Parse()
-        {
-            switch (Packet.Direction)
-            {
-                case Direction.Client:
-                    {
-                        AppendFormatLine("FLG Type: {0}", (LfgType)Reader.ReadUInt32());
-                        AppendFormatLine("FLG Entry: {0}", Reader.ReadUInt32());
-                        AppendFormatLine("FLG Unk1: {0}", Reader.ReadUInt32());
-                    }
-                    break;
-                case Direction.Server:
-                    ParseServerLookingForGroup();
-                    break;
-            }
-        }
-
-        void ParseServerLookingForGroup()
         {
             AppendFormatLine("FLG Type: {0}", (LfgType)Reader.ReadUInt32());
             AppendFormatLine("FLG Entry: {0}", Reader.ReadUInt32());

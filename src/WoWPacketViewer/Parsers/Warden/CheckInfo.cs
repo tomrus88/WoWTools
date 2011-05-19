@@ -1,4 +1,4 @@
-namespace WoWPacketViewer.Parsers.Warden
+namespace WoWPacketViewer
 {
     struct CheckInfo
     {

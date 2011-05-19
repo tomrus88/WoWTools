@@ -1,6 +1,6 @@
 using System;
 
-namespace WoWPacketViewer.Parsers.Spells
+namespace WoWPacketViewer
 {
     [Flags]
     enum CastFlags : uint

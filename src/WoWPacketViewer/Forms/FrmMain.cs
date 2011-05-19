@@ -262,5 +262,10 @@ namespace WoWPacketViewer
                 tabControl1.TabPages[index].Dispose();
             }
         }
+
+        private void wardenDebugToolStripMenuItem_CheckedChanged(object sender, EventArgs e)
+        {
+            WardenData.Enabled = wardenDebugToolStripMenuItem.Checked;
+        }
     }
 }

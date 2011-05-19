@@ -12,8 +12,8 @@ namespace WoWPacketViewer
         private IPacketReader packetViewer;
         private List<Packet> packets;
         private Dictionary<int, ListViewItem> _listCache = new Dictionary<int, ListViewItem>();
-        private bool searchUp;
-        private bool ignoreCase;
+        private bool _searchUp;
+        private bool _ignoreCase;
         private string file;
 
         public PacketViewTab(string file)
@@ -60,32 +60,24 @@ namespace WoWPacketViewer
             if (!Loaded)
                 return;
 
-            this.searchUp = searchUp;
-            this.ignoreCase = ignoreCase;
+            _searchUp = searchUp;
+            _ignoreCase = ignoreCase;
 
             var item = _list.FindItemWithText(text, true, SelectedIndex, true);
             if (item != null)
             {
-                _list.EnsureVisible(item.Index);
-                _list.SelectedIndices.Clear();
-                _list.SelectedIndices.Add(item.Index);
+                item.Selected = true;
+                item.EnsureVisible();
+                return;
             }
-            else
-            {
-                MessageBox.Show(string.Format("Can't find:'{0}'", text),
-                                "Packet Viewer",
-                                MessageBoxButtons.OK,
-                                MessageBoxIcon.Information);
-            }
+
+            MessageBox.Show(string.Format("Can't find:'{0}'", text), "Packet Viewer", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
         #endregion
 
         private void _list_SelectedIndexChanged(object sender, EventArgs e)
         {
-            richTextBox1.Clear();
-            richTextBox2.Clear();
-
             var packet = packets[SelectedIndex];
 
             richTextBox1.Text = packet.HexLike();
@@ -109,44 +101,41 @@ namespace WoWPacketViewer
 
         private void _list_SearchForVirtualItem(object sender, SearchForVirtualItemEventArgs e)
         {
-            var comparisonType = ignoreCase
+            var comparisonType = _ignoreCase
                                     ? StringComparison.InvariantCultureIgnoreCase
                                     : StringComparison.InvariantCulture;
 
-            if (searchUp)
+            if (_searchUp)
             {
                 for (var i = SelectedIndex - 1; i >= 0; --i)
-                {
-                    var op = packets[i].Code.ToString();
-                    if (op.IndexOf(e.Text, comparisonType) != -1)
-                    {
-                        e.Index = i;
+                    if (SearchMatches(e, comparisonType, i))
                         break;
-                    }
-                }
             }
             else
             {
                 for (int i = SelectedIndex + 1; i < _list.Items.Count; ++i)
-                {
-                    var op = packets[i].Code.ToString();
-                    if (op.IndexOf(e.Text, comparisonType) != -1)
-                    {
-                        e.Index = i;
+                    if (SearchMatches(e, comparisonType, i))
                         break;
-                    }
-                }
             }
+        }
+
+        private bool SearchMatches(SearchForVirtualItemEventArgs e, StringComparison comparisonType, int i)
+        {
+            var op = packets[i].Code.ToString();
+            if (op.IndexOf(e.Text, comparisonType) != -1)
+            {
+                e.Index = i;
+                return true;
+            }
+            return false;
         }
 
         private void _list_CacheVirtualItems(object sender, CacheVirtualItemsEventArgs e)
         {
-            // We've gotten a request to refresh the cache.
-            // First check if it's really necessary.
+            // We've gotten a request to refresh the cache. First check if it's really necessary.
             if (_listCache.ContainsKey(e.StartIndex) && _listCache.ContainsKey(e.EndIndex))
             {
-                // If the newly requested cache is a subset of the old cache, 
-                // no need to rebuild everything, so do nothing.
+                // If the newly requested cache is a subset of the old cache, no need to rebuild everything, so do nothing.
                 return;
             }
 
@@ -176,7 +165,8 @@ namespace WoWPacketViewer
                         p.TicksCount.ToString("X8"), 
                         p.Code.ToString(),
                         String.Empty,
-                        p.Data.Length.ToString()
+                        p.Data.Length.ToString(),
+                        ParserFactory.HasParser(p.Code).ToString()
                     })
                 : new ListViewItem(new[]
                     {
@@ -184,7 +174,8 @@ namespace WoWPacketViewer
                         p.TicksCount.ToString("X8"), 
                         String.Empty,
                         p.Code.ToString(), 
-                        p.Data.Length.ToString()
+                        p.Data.Length.ToString(),
+                        ParserFactory.HasParser(p.Code).ToString()
                     });
         }
     }

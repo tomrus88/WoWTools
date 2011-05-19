@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using WowTools.Core;
 
-namespace WoWPacketViewer.Parsers
+namespace WoWPacketViewer
 {
     [Parser(OpCodes.SMSG_UPDATE_OBJECT)]
     [Parser(OpCodes.SMSG_COMPRESSED_UPDATE_OBJECT)]

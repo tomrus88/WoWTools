@@ -1,7 +1,7 @@
 ﻿using System;
 using WowTools.Core;
 
-namespace WoWPacketViewer.Parsers
+namespace WoWPacketViewer
 {
     [Parser(OpCodes.SMSG_AURA_UPDATE)]
     [Parser(OpCodes.SMSG_AURA_UPDATE_ALL)]

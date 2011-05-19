@@ -1,6 +1,6 @@
 using WowTools.Core;
 
-namespace WoWPacketViewer.Parsers
+namespace WoWPacketViewer
 {
     [Parser(OpCodes.SMSG_AUCTION_LIST_PENDING_SALES)]
     class AuctionListPendngSales : Parser

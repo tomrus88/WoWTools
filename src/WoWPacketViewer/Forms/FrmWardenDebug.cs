@@ -1,11 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
-using WoWPacketViewer.Parsers.Warden;
 
 namespace WoWPacketViewer
 {
-    internal partial class FrmWardenDebug : Form
+    partial class FrmWardenDebug : Form
     {
         public FrmWardenDebug()
         {

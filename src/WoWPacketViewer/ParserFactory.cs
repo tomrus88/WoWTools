@@ -5,7 +5,6 @@ using System.IO;
 using System.Reflection;
 using System.Text;
 using System.Windows.Forms;
-using WoWPacketViewer.Parsers;
 using WowTools.Core;
 
 namespace WoWPacketViewer
@@ -126,6 +125,11 @@ namespace WoWPacketViewer
             var parser = (Parser)Activator.CreateInstance(type);
             parser.Initialize(packet);
             return parser;
+        }
+
+        public static bool HasParser(OpCodes opcode)
+        {
+            return Parsers.ContainsKey((int)opcode);
         }
     }
 }

@@ -2,7 +2,7 @@ using System.IO;
 using System.Text;
 using WowTools.Core;
 
-namespace WoWPacketViewer.Parsers.Warden
+namespace WoWPacketViewer
 {
     [Parser(OpCodes.CMSG_WARDEN_DATA)]
     class CmsgWardenData : Parser

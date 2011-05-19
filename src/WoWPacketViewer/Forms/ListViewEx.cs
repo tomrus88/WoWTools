@@ -7,7 +7,7 @@ namespace WoWPacketViewer
         public ListViewEx()
             : base()
         {
-            SetStyle(ControlStyles.AllPaintingInWmPaint | ControlStyles.OptimizedDoubleBuffer, true);
+            DoubleBuffered = true;
         }
     }
 }
