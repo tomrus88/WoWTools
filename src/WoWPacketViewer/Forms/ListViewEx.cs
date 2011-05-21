@@ -2,7 +2,7 @@
 
 namespace WoWPacketViewer
 {
-    class ListViewEx : ListView
+    public class ListViewEx : ListView
     {
         public ListViewEx()
             : base()

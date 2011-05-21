@@ -267,5 +267,40 @@ namespace WoWPacketViewer
         {
             WardenData.Enabled = wardenDebugToolStripMenuItem.Checked;
         }
+
+        private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("NYI!");
+        }
+
+        private void textToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (SelectedTab == null)
+                return;
+
+            colorDialog1.Color = SelectedTab.PacketList.ForeColor;
+
+            var result = colorDialog1.ShowDialog();
+
+            if (result != System.Windows.Forms.DialogResult.OK)
+                return;
+
+            SelectedTab.PacketList.ForeColor = colorDialog1.Color;
+        }
+
+        private void backgroungToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (SelectedTab == null)
+                return;
+
+            colorDialog1.Color = SelectedTab.PacketList.BackColor;
+
+            var result = colorDialog1.ShowDialog();
+
+            if (result != System.Windows.Forms.DialogResult.OK)
+                return;
+
+            SelectedTab.PacketList.BackColor = colorDialog1.Color;
+        }
     }
 }

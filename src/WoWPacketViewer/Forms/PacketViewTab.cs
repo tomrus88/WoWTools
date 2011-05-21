@@ -53,6 +53,11 @@ namespace WoWPacketViewer
             set { file = value; }
         }
 
+        public ListViewEx PacketList
+        {
+            get { return _list; }
+        }
+
         #region ISupportFind Members
 
         public void Search(string text, bool searchUp, bool ignoreCase)
