@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Windows.Forms;
@@ -26,16 +27,26 @@ namespace WoWPacketViewer
 
             packets = packetViewer.ReadPackets(file).ToList();
 
-            _list.VirtualMode = true;
-            _list.VirtualListSize = packets.Count;
-            _list.EnsureVisible(0);
+            PacketView.VirtualMode = true;
+            PacketView.VirtualListSize = packets.Count;
+            PacketView.EnsureVisible(0);
+        }
+
+        public void SetColors(Color listFore, Color listBack, Color hexFore, Color hexBack, Color parsedFore, Color parsedBack)
+        {
+            PacketView.ForeColor = listFore;
+            PacketView.BackColor = listBack;
+            HexView.ForeColor = hexFore;
+            HexView.BackColor = hexBack;
+            ParsedView.ForeColor = parsedFore;
+            ParsedView.BackColor = parsedBack;
         }
 
         private int SelectedIndex
         {
             get
             {
-                var sic = _list.SelectedIndices;
+                var sic = PacketView.SelectedIndices;
                 return sic.Count > 0 ? sic[0] : 0;
             }
         }
@@ -55,7 +66,12 @@ namespace WoWPacketViewer
 
         public ListViewEx PacketList
         {
-            get { return _list; }
+            get { return PacketView; }
+        }
+
+        public uint Build
+        {
+            get { return packetViewer.Build; }
         }
 
         #region ISupportFind Members
@@ -68,15 +84,15 @@ namespace WoWPacketViewer
             _searchUp = searchUp;
             _ignoreCase = ignoreCase;
 
-            var item = _list.FindItemWithText(text, true, SelectedIndex, true);
+            var item = PacketView.FindItemWithText(text, true, SelectedIndex, true);
             if (item != null)
             {
-                _list.BeginUpdate();
-                _list.GridLines = false;
+                PacketView.BeginUpdate();
+                PacketView.GridLines = false;
                 item.Selected = true;
                 item.EnsureVisible();
-                _list.GridLines = true;
-                _list.EndUpdate();
+                PacketView.GridLines = true;
+                PacketView.EndUpdate();
                 return;
             }
 
@@ -89,8 +105,8 @@ namespace WoWPacketViewer
         {
             var packet = packets[SelectedIndex];
 
-            richTextBox1.Text = packet.HexLike();
-            richTextBox2.Text = ParserFactory.CreateParser(packet).ToString();
+            HexView.Text = packet.HexLike();
+            ParsedView.Text = ParserFactory.CreateParser(packet).ToString();
         }
 
         private void _list_RetrieveVirtualItem(object sender, RetrieveVirtualItemEventArgs e)
@@ -124,7 +140,7 @@ namespace WoWPacketViewer
             }
             else
             {
-                for (int i = SelectedIndex + 1; i < _list.Items.Count; ++i)
+                for (int i = SelectedIndex + 1; i < PacketView.Items.Count; ++i)
                     if (SearchMatches(e, comparisonType, i))
                         break;
             }
@@ -188,6 +204,27 @@ namespace WoWPacketViewer
                         p.Data.Length.ToString(),
                         ParserFactory.HasParser(p.Code).ToString()
                     });
+        }
+
+        private Control ControlsLoop(string name, Control control)
+        {
+            foreach (Control c in control.Controls)
+            {
+                if (c.Name == name)
+                    return c;
+                else if (c.Controls.Count != 0)
+                {
+                    var res = ControlsLoop(name, c);
+                    if (res != null)
+                        return res;
+                }
+            }
+            return null;
+        }
+
+        public Control GetControlByName(string name)
+        {
+            return ControlsLoop(name, this);
         }
     }
 }

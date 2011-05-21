@@ -1,6 +1,7 @@
 ﻿using System;
 using System.IO;
 using System.Windows.Forms;
+using WoWPacketViewer.Properties;
 using WowTools.Core;
 
 namespace WoWPacketViewer
@@ -45,6 +46,11 @@ namespace WoWPacketViewer
         private void CreateTab(string file)
         {
             var viewTab = new PacketViewTab(file);
+
+            viewTab.SetColors(Settings.Default.PacketViewForeColor, Settings.Default.PacketViewBackColor,
+                Settings.Default.HexViewForeColor, Settings.Default.HexViewBackColor,
+                Settings.Default.ParsedViewForeColor, Settings.Default.ParsedViewBackColor);
+
             viewTab.Dock = DockStyle.Fill;
 
             var tabPage = new TabPage(viewTab.Text);
@@ -195,7 +201,10 @@ namespace WoWPacketViewer
         private void tabControl1_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (!tabControl1.HasChildren)
+            {
                 tabControl1.Visible = false;
+                return;
+            }
 
             if (searchForm != null)
                 searchForm.CurrentTab = SelectedTab;
@@ -270,37 +279,47 @@ namespace WoWPacketViewer
 
         private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("NYI!");
+            MessageBox.Show("NYI!", Text);
         }
 
-        private void textToolStripMenuItem_Click(object sender, EventArgs e)
+        private void foreColorStripMenuItem_Click(object sender, EventArgs e)
         {
             if (SelectedTab == null)
                 return;
 
-            colorDialog1.Color = SelectedTab.PacketList.ForeColor;
+            var name = (string)((ToolStripMenuItem)sender).Tag;
 
-            var result = colorDialog1.ShowDialog();
+            var control = SelectedTab.GetControlByName(name);
 
-            if (result != System.Windows.Forms.DialogResult.OK)
+            colorChooser.Color = control.ForeColor;
+
+            if (colorChooser.ShowDialog() != System.Windows.Forms.DialogResult.OK)
                 return;
 
-            SelectedTab.PacketList.ForeColor = colorDialog1.Color;
+            control.ForeColor = colorChooser.Color;
+
+            Settings.Default[name + "ForeColor"] = colorChooser.Color;
+            Settings.Default.Save();
         }
 
-        private void backgroungToolStripMenuItem_Click(object sender, EventArgs e)
+        private void backColorStripMenuItem_Click(object sender, EventArgs e)
         {
             if (SelectedTab == null)
                 return;
 
-            colorDialog1.Color = SelectedTab.PacketList.BackColor;
+            var name = (string)((ToolStripMenuItem)sender).Tag;
 
-            var result = colorDialog1.ShowDialog();
+            var control = SelectedTab.GetControlByName(name);
 
-            if (result != System.Windows.Forms.DialogResult.OK)
+            colorChooser.Color = control.BackColor;
+
+            if (colorChooser.ShowDialog() != System.Windows.Forms.DialogResult.OK)
                 return;
 
-            SelectedTab.PacketList.BackColor = colorDialog1.Color;
+            control.BackColor = colorChooser.Color;
+
+            Settings.Default[name + "BackColor"] = colorChooser.Color;
+            Settings.Default.Save();
         }
     }
 }

@@ -1,7 +1,24 @@
 ﻿<?xml version='1.0' encoding='utf-8'?>
-<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)">
-  <Profiles>
-    <Profile Name="(Default)" />
-  </Profiles>
-  <Settings />
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="WoWPacketViewer.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="PacketViewForeColor" Type="System.Drawing.Color" Scope="User">
+      <Value Profile="(Default)">MediumSeaGreen</Value>
+    </Setting>
+    <Setting Name="PacketViewBackColor" Type="System.Drawing.Color" Scope="User">
+      <Value Profile="(Default)">WindowText</Value>
+    </Setting>
+    <Setting Name="HexViewForeColor" Type="System.Drawing.Color" Scope="User">
+      <Value Profile="(Default)">Window</Value>
+    </Setting>
+    <Setting Name="HexViewBackColor" Type="System.Drawing.Color" Scope="User">
+      <Value Profile="(Default)">WindowText</Value>
+    </Setting>
+    <Setting Name="ParsedViewForeColor" Type="System.Drawing.Color" Scope="User">
+      <Value Profile="(Default)">Window</Value>
+    </Setting>
+    <Setting Name="ParsedViewBackColor" Type="System.Drawing.Color" Scope="User">
+      <Value Profile="(Default)">WindowText</Value>
+    </Setting>
+  </Settings>
 </SettingsFile>
